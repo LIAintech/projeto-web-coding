@@ -1,0 +1,102 @@
+/* PORTAL DO ALUNO 
+:root{
+  --fundo:#f3f5fa;          /* fundo da página */
+  --papel:#ffffff;          /* fundo dos blocos */
+  --tinta:#14213d;          /* texto principal */
+  --suave:#5b6784;          /* texto secundário */
+  --destaque:#2f5bea;       /* azul principal */
+  --destaque-claro:#e8eeff; /* azul bem claro (item atual) */
+  --hoje:#ffc233;           /* amarelo da aula de agora */
+  --linha:#dde2ee;          /* bordas finas */
+}
+
+/* 2. FONTE */
+@font-face{font-family:"Nimbus";src:url("../fonts/nimbus-sans-regular.woff") format("woff");font-weight:400;font-display:swap}
+@font-face{font-family:"Nimbus";src:url("../fonts/nimbus-sans-bold.woff") format("woff");font-weight:700;font-display:swap}
+
+/* 3. BASE: vale para todas as páginas */
+*{box-sizing:border-box;margin:0}
+body{font-family:"Nimbus",Arial,sans-serif;background:var(--fundo);color:var(--tinta);line-height:1.5;
+  display:grid;grid-template-columns:230px 1fr;min-height:100vh} /* coluna do menu + coluna do conteúdo */
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:3px solid var(--destaque);outline-offset:2px} /* foco visível para quem usa teclado */
+.skip-link{position:absolute;left:-999px}                         /* "pular para o conteúdo": escondido... */
+.skip-link:focus{left:8px;top:8px;background:#fff;padding:8px}    /* ...aparece ao apertar Tab */
+
+/* 4. MENU LATERAL */
+.lateral{background:var(--papel);border-right:1px solid var(--linha);padding:28px 0;position:sticky;top:0;height:100vh}
+.marca{font-weight:700;font-size:1.2rem;display:block;margin:0 24px 28px}
+.marca small{display:block;font-weight:400;font-size:.85rem;color:var(--suave)}
+.lateral nav{display:flex;flex-direction:column}
+.lateral nav a{padding:10px 24px;color:var(--suave);border-left:3px solid transparent}
+.lateral nav a:hover{color:var(--tinta);background:var(--fundo)}
+.lateral nav a[aria-current="page"]{color:var(--destaque);font-weight:700;border-left-color:var(--destaque);background:var(--destaque-claro)} /* página atual */
+
+/* 5. CABEÇALHO DA PÁGINA (título + perfil) */
+main{padding:40px clamp(18px,4vw,56px) 56px;max-width:1100px}
+.topo{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+h1{font-size:clamp(1.8rem,4vw,2.4rem);line-height:1.15}
+.topo p{color:var(--suave);margin-top:6px}
+.perfil{display:flex;gap:10px;align-items:center;color:var(--suave)}
+.perfil span{width:34px;height:34px;border-radius:50%;background:var(--destaque);color:#fff;display:grid;place-items:center;font-weight:700}
+
+/* 6. BLOCOS DA PÁGINA INICIAL */
+.resumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px}
+.resumo div{background:var(--papel);border:1px solid var(--linha);border-radius:8px;padding:16px}
+.resumo strong{display:block;font-size:1.8rem;line-height:1.2;color:var(--destaque)}
+.resumo span{color:var(--suave);font-size:.9rem}
+
+.grade{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.cartao{background:var(--papel);border:1px solid var(--linha);border-radius:8px;padding:24px}
+.cartao h2{font-size:1.15rem;margin-bottom:16px}
+ul{list-style:none;padding:0}
+.aulas li,.avisos li{border-top:1px solid var(--linha);padding:14px 0}
+.aulas li:first-child,.avisos li:first-child{border-top:0}
+.aulas li{display:grid;grid-template-columns:70px 1fr auto;gap:14px;align-items:center}
+small{display:block;color:var(--suave)}
+.hora{font-weight:700}
+.agora{background:var(--hoje);border-left:4px solid var(--tinta);padding-left:12px!important} /* aula acontecendo agora */
+.etiqueta{font-size:.8rem;font-weight:700;background:var(--tinta);color:#fff;border-radius:4px;padding:2px 10px}
+.prazo{color:var(--destaque);font-weight:700}
+
+.atalhos{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.atalhos a{background:var(--papel);border:1px solid var(--linha);border-radius:8px;padding:16px;font-weight:700}
+.atalhos a:hover{border-color:var(--destaque);color:var(--destaque)}
+.atalhos span{display:block;font-weight:400;color:var(--suave);font-size:.9rem}
+
+footer{margin-top:36px;color:var(--suave);font-size:.85rem}
+
+/* 7. PÁGINAS INTERNAS */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}  /* disciplinas */
+.cards h3{font-size:1.1rem;margin-bottom:4px}
+.cards p{color:var(--suave);font-size:.92rem}
+.topo-card{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.codigo{font-size:.8rem;font-weight:700;color:var(--destaque);background:var(--destaque-claro);border-radius:4px;padding:3px 9px}
+.barra{height:8px;background:var(--linha);border-radius:99px;overflow:hidden;margin-top:6px} /* barra de progresso: a largura vem do HTML */
+.barra i{display:block;height:100%;background:var(--destaque)}
+
+.tabela-caixa{overflow-x:auto;padding:8px 20px}  /* tabela rola de lado no celular */
+table{width:100%;border-collapse:collapse;min-width:560px}
+th{text-align:left;font-size:.85rem;color:var(--suave);font-weight:400;padding:14px 10px;border-bottom:1px solid var(--linha)}
+td{padding:14px 10px;border-bottom:1px solid var(--linha)}
+tr:last-child td{border-bottom:0}
+.selo{display:inline-block;font-size:.8rem;font-weight:700;border-radius:4px;padding:3px 10px}
+.ok{background:#dff1e6;color:#14603a}.alerta{background:#fbf0cc;color:#7a5200}.erro{background:#fbe1e1;color:#9b1c1c}
+
+.botao{display:inline-block;background:var(--destaque);color:#fff;font-weight:700;border-radius:6px;padding:8px 16px;font-size:.9rem}
+.botao:hover{background:#2449c0}
+.botao.claro{background:var(--destaque-claro);color:var(--destaque)}
+.celula-aula{background:var(--destaque-claro);border-radius:6px;padding:8px 10px;font-size:.88rem}  /* quadrinho do horário */
+.livro{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--linha)}
+.livro:first-of-type{border-top:0}
+
+/* 8. CELULAR: menu vira uma faixa no topo, blocos ficam em uma coluna */
+@media (max-width:860px){
+  body{grid-template-columns:1fr}
+  .lateral{position:static;height:auto;padding:16px 0}
+  .marca{margin-bottom:12px}
+  .lateral nav{flex-direction:row;overflow-x:auto}
+  .lateral nav a{white-space:nowrap;border-left:0;border-bottom:3px solid transparent}
+  .lateral nav a[aria-current="page"]{border-bottom-color:var(--destaque)}
+  .grade{grid-template-columns:1fr}
+}
